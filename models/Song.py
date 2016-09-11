@@ -77,7 +77,7 @@ class Song(PrintableStructure):
                     if song.song.has_analyzing_server():
                         songs.append(Song.get_from_csv_array(row).to_comparable_song())
                 except Exception as e:
-                    print(e)
+                    pass
         return songs
 
     @classmethod
