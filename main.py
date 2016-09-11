@@ -17,7 +17,7 @@ def main():
 
     utils.export_database()
 
-    print("Exported database")
+    print("Importing songs...")
 
     songs = Song.list_all_songs()
 

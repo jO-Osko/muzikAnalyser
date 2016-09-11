@@ -2,6 +2,7 @@
 
 """Utils"""
 import csv
+import hashlib
 
 __author__ = "Filip Koprivec"
 
@@ -33,3 +34,27 @@ class Utils:
             csv_writer = csv.writer(out_csv, quoting=csv.QUOTE_MINIMAL)
             for result in cursor:
                 csv_writer.writerow(list(result))
+
+        print("Exported database")
+
+        self.calculate_hash_of_non_versioned_files()
+
+        print("Hashed files")
+
+    # Calculate hash of non versioned files, to ensure, that i did not cheat with data
+    def calculate_hash_of_non_versioned_files(self):
+        filenames = ["export.csv", "export_servers.csv", "main.csv", "sqlite.db"]
+
+        files = [(os.path.join("data", filename), os.path.join("data", filename + ".hash")) for filename in filenames]
+
+        for in_file_path, out_file_path in files:
+            open(out_file_path, "w").write(str(self.hash_file(in_file_path)))
+
+    def hash_file(self, file_path, hash_algorithm=hashlib.sha512(), buff=65536):
+        in_file = open(file_path, "rb")
+        buf = in_file.read(buff)
+        while len(buf):
+            hash_algorithm.update(buf)
+            buf = in_file.read(buff)
+
+        return hash_algorithm.hexdigest()
