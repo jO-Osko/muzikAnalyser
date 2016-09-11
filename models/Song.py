@@ -33,7 +33,7 @@ class Canonizer:
     def canonize(self, name: str) -> str:
         name = self.translate(name.lower()).split()
         name = filter(lambda x: self.is_allowed_word(x), name)
-        return " ".join(sorted(name))
+        return " ".join(name)
 
 
 class Song(PrintableStructure):
