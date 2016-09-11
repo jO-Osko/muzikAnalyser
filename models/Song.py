@@ -63,26 +63,27 @@ class Song(PrintableStructure):
         return ComparableSong(self)
 
     def has_analyzing_server(self):
-        return self.server in self.analyzing_servers
+        return self.is_analyzing_server(self.server)
 
     @staticmethod
-    def list_all_songs(file_path="data/main.csv") -> List["ComparableSong"]:
+    def is_analyzing_server(server_code):
+        return server_code in Song.analyzing_servers
+
+    @staticmethod
+    def list_all_songs(file_path="data/export.csv") -> List["ComparableSong"]:
         songs = []
         with open(file_path, encoding="utf8") as in_file:
-            reader = csv.reader(in_file)
+            reader = csv.reader(line.replace("\0", "") for line in in_file)
             for row in reader:
-                # Database is corrupted
-                try:
-                    song = Song.get_from_csv_array(row).to_comparable_song()
-                    if song.song.has_analyzing_server():
-                        songs.append(Song.get_from_csv_array(row).to_comparable_song())
-                except Exception as e:
-                    pass
+                # Canonizing is expensive, test if we need it
+                server = int(row[2])
+                if Song.is_analyzing_server(server):
+                    songs.append(Song.get_from_csv_array(row).to_comparable_song())
         return songs
 
     @classmethod
     def get_from_csv_array(cls, array):
-        return cls(array[0], array[2], array[1], array[12], array[10], array[11], array[15])
+        return cls(*array)
 
 
 class ComparableSong(PrintableStructure):
