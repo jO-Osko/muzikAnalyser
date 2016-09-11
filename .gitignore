@@ -1,0 +1,7 @@
+.idea/
+models/__pycache__/
+utils/__pycache__/
+/data/export.csv
+/data/sqlite.db
+/data/main.csv
+/data/export_servers.csv
