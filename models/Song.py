@@ -2,6 +2,7 @@
 
 """Song model"""
 import string
+from typing import List
 
 from models.PrintableStructure import PrintableStructure
 
@@ -45,7 +46,7 @@ class Song(PrintableStructure):
     def __init__(self, muzik_id, name, server, bit_rate, duration, size, frequency):
         self.muzik_id = muzik_id                        # type: str
         self.name = name                                # type: str
-        self.server = server                            # type: str
+        self.server = server                            # type: int
         self.bit_rate = bit_rate                        # type: int
         self.duration = duration                        # type: int
         self.size = size                                # type: int
@@ -55,6 +56,18 @@ class Song(PrintableStructure):
     # Canonize name for song name comparison
     def make_canonic_name(self):
         return self.cannonizer.canonize(self.name)
+
+    def to_comparable_song(self) -> "ComparableSong":
+        return ComparableSong(self)
+
+    @staticmethod
+    def list_all_songs() -> List["Song"]:
+        # Mock
+        return [Song("1", "harmonika", "muzik", 100, 100, 100, 100)]
+
+    @staticmethod
+    def list_comparable_songs() -> List["ComparableSong"]:
+        return [song.to_comparable_song() for song in Song.list_all_songs()]
 
 
 class ComparableSong(PrintableStructure):
