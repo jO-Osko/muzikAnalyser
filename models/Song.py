@@ -3,6 +3,8 @@
 """Song model"""
 import string
 
+from models.PrintableStructure import PrintableStructure
+
 __author__ = "Filip Koprivec"
 
 
@@ -32,8 +34,11 @@ class Canonizer:
         return " ".join(name)
 
 
-class Song:
+class Song(PrintableStructure):
     __slots__ = ["muzik_id", "name", "server", "bit_rate", "duration", "size", "frequency", "canonic_name"]
+    __printable_fields__ = __slots__
+
+    __printable_name__ = "Song"
 
     cannonizer = Canonizer()
 
@@ -52,8 +57,11 @@ class Song:
         return self.cannonizer.canonize(self.name)
 
 
-class ComparableSong:
+class ComparableSong(PrintableStructure):
     __slots__ = ["song", "comparable_name", "hash"]
+    __printable_fields__ = __slots__
+
+    __printable_name__ = "ComparableSong"
 
     def __init__(self, song: Song):
         self.song = song
