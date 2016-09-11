@@ -46,11 +46,11 @@ class Song(PrintableStructure):
     def __init__(self, muzik_id, name, server, bit_rate, duration, size, frequency):
         self.muzik_id = muzik_id                        # type: str
         self.name = name                                # type: str
-        self.server = server                            # type: int
-        self.bit_rate = bit_rate                        # type: int
-        self.duration = duration                        # type: int
-        self.size = size                                # type: int
-        self.frequency = frequency                      # type: int
+        self.server = int(server)                       # type: int
+        self.bit_rate = int(bit_rate)                   # type: int
+        self.duration = int(duration)                   # type: int
+        self.size = int(size)                           # type: int
+        self.frequency = int(frequency)                 # type: int
         self.canonic_name = self.make_canonic_name()    # type: str
 
     # Canonize name for song name comparison
