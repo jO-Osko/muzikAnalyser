@@ -6,11 +6,19 @@ import pickle
 import os.path
 
 from models.Song import Song
+from utils.utils import Utils
 
 __author__ = "Filip Koprivec"
 
 
 def main():
+
+    utils = Utils()
+
+    utils.export_database()
+
+    print("Exported database")
+
     songs = Song.list_all_songs()
 
     print("All songs:", len(songs))
