@@ -3,7 +3,12 @@
 """Song model"""
 import csv
 import string
-from typing import List
+
+try:
+    from typing import List
+except ImportError:  # Jupyter on < 3.5
+    from collections import defaultdict
+    List = defaultdict(int)
 
 from models.PrintableStructure import PrintableStructure
 
@@ -32,6 +37,8 @@ class Canonizer:
 
     def remove_artist(self, name: str) -> str:
         artist, *name = name.split("-", 1)
+        if not name:
+            return artist
         return " ".join(name)
 
     def canonize(self, name: str) -> str:
