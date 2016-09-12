@@ -11,10 +11,17 @@ import os.path
 
 
 class Utils:
-    def __init__(self):
-        pass
 
-    def export_database(self, servers=(514, 442, 443, 590, 1152, 520, 516, 1157, 470, 453, 451, 471)):
+    base_servers = {442: "balkanmp3_new", 443: "balkanmp3s_old", 451: "yucafe_old", 453: "yucafe_new",
+                        470: "narodnjak.si", 471: "zlatizvoki.com", 514: "balkandj", 516: "mixoteka", 520: "megamixers",
+                        590: "folkoteka", 1152: "klav.ma3x.org", 1157: "muzickinet"}
+
+    def __init__(self, servers=None):
+        self.servers = servers if servers else self.base_servers
+
+        self.server_ids = [j for j in self.servers]
+
+    def export_database(self):
         if not os.path.exists(os.path.join("data", "sqlite.db")):
             raise FileNotFoundError()
         base_conn = sqlite3.connect(os.path.join("data", "sqlite.db"))
@@ -30,7 +37,7 @@ class Utils:
         # Export for validation
         cursor.execute("SELECT id, name, server, bitr, time, size, freq FROM main "
                         # I know this is bad, but normal parametrized queries do not work
-                       "WHERE server IN {servers}".format(servers=servers))
+                       "WHERE server IN {servers}".format(servers=tuple(self.get_server_ids())))
 
         with open(os.path.join("data", "export_servers.csv"), "w", encoding="utf8", newline="") as out_csv:
             csv_writer = csv.writer(out_csv, quoting=csv.QUOTE_MINIMAL)
@@ -60,3 +67,9 @@ class Utils:
             buf = in_file.read(buff)
 
         return hash_algorithm.hexdigest()
+
+    def get_server_ids(self):
+        return self.server_ids
+
+    def get_server_dict(self):
+        return self.servers
