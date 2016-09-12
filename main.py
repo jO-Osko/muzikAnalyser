@@ -36,7 +36,7 @@ def main(export=False):
 
     duplicates = []
     for name, duplicate_songs in similar.items():
-        if len(duplicate_songs) > 2:
+        if len(duplicate_songs) > 2 and name:
             duplicates.append(duplicate_songs)
 
     pickle.dump(songs, open(os.path.join("data", "output", "songs.out"), "wb"))
