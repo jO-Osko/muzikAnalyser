@@ -15,7 +15,10 @@ def main():
 
     utils = Utils()
 
-    utils.export_database()
+    try:
+        utils.export_database()
+    except FileNotFoundError:
+        print("Database not found, using git exported files")
 
     print("Importing songs...")
 

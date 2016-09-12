@@ -15,6 +15,8 @@ class Utils:
         pass
 
     def export_database(self, servers=(514, 442, 443, 590, 1152, 520, 516, 1157, 470, 453, 451, 471)):
+        if not os.path.exists(os.path.join("data", "sqlite.db")):
+            raise FileNotFoundError()
         base_conn = sqlite3.connect(os.path.join("data", "sqlite.db"))
         base_conn.text_factory = lambda x: str(x, "utf8", "ignore")
         cursor = base_conn.cursor()
