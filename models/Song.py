@@ -30,7 +30,12 @@ class Canonizer:
         name = [c if self.is_allowed_char(c) else " " for c in name]
         return "".join(name)
 
+    def remove_artist(self, name: str) -> str:
+        artist, *name = name.split("-", 1)
+        return " ".join(name)
+
     def canonize(self, name: str) -> str:
+        name = self.remove_artist(name)
         name = self.translate(name.lower()).split()
         name = filter(lambda x: self.is_allowed_word(x), name)
         return " ".join(name)
@@ -79,6 +84,15 @@ class Song(PrintableStructure):
                 server = int(row[2])
                 if Song.is_analyzing_server(server):
                     songs.append(Song.get_from_csv_array(row).to_comparable_song())
+        return songs
+
+    @staticmethod
+    def list_all_songs_from_analyzing_servers(file_path="data/export_servers.csv") -> List["ComparableSong"]:
+        songs = []
+        with open(file_path, encoding="utf8") as in_file:
+            reader = csv.reader(line.replace("\0", "") for line in in_file)
+            for row in reader:
+                songs.append(Song.get_from_csv_array(row).to_comparable_song())
         return songs
 
     @classmethod

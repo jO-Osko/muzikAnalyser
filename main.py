@@ -19,7 +19,7 @@ def main():
 
     print("Importing songs...")
 
-    songs = Song.list_all_songs()
+    songs = Song.list_all_songs_from_analyzing_servers()
 
     print("All songs:", len(songs))
 
