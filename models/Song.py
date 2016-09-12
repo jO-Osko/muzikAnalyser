@@ -17,7 +17,7 @@ __author__ = "Filip Koprivec"
 
 # Make canonical
 class Canonizer:
-    def __init__(self, allowed_chars=string.ascii_lowercase+string.digits, forbidden_words=("official", "video", "radio", "edit")):
+    def __init__(self, allowed_chars=string.ascii_lowercase+string.digits, forbidden_words=("official", "video", "edit")):
         self.allowed_chars = set(allowed_chars)
         self.chars_replace_dict = {"č": "c", "š": "s", "ć": "c", "ž": "z", "đ": "dj", "ł": "l", "ß": "ss"}
         self.special_replace_dict = {"'": ""}  # For  "It's something" == "Its something"
@@ -42,10 +42,17 @@ class Canonizer:
         return " ".join(name)
 
     def canonize(self, name: str) -> str:
+        arg = name
         name = self.remove_artist(name)
         name = self.translate(name.lower()).split()
         name = filter(lambda x: self.is_allowed_word(x), name)
-        return " ".join(name)
+        rtr = " ".join(name)
+        if not rtr:
+            arg = self.translate(arg.lower()).split()
+            arg = filter(lambda x: self.is_allowed_word(x), arg)
+            arg = " ".join(arg)
+            return arg
+        return rtr
 
 
 class Song(PrintableStructure):
