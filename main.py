@@ -11,14 +11,17 @@ from utils.utils import Utils
 __author__ = "Filip Koprivec"
 
 
-def main():
+def main(export=False):
 
-    utils = Utils()
+    if export:
+        utils = Utils()
 
-    try:
-        utils.export_database()
-    except FileNotFoundError:
-        print("Database not found, using git exported files")
+        print("Exporting database")
+
+        try:
+            utils.export_database()
+        except FileNotFoundError:
+            print("Database not found, using git exported files")
 
     print("Importing songs...")
 
