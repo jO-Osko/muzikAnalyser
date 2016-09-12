@@ -34,7 +34,5 @@ Ker je vseh pesmi preveč (malo čez 6,000,000) sem se odločil, da sem bom omej
 Namen analize je ovrednotiti kvaliteto iste pesmi na več različnih strežnikih in ugotoviti, kdo izmed teh ponuja najboljšo kvaliteto
 
 * Pri posamezni ponavljajoči pesmi bomo pogledali, kateri izmed strežnikov jo ponuja pri največji bitni hitrosti (Osnovno merilo za določanje kvalitete)
-<!-- Too much work -->
-<!-- * Pogledali si bomo tudi velikost datoteke pri posamezni bitni hitrosti.
-Če je velikost datoteke pri večji bitni hitrosti primerljiva z velikostjo pri veliko manjši bitni hitrosti (320 <-> 256 <-> 192 <-> 128 ...), to lahko nakazuje na nesmiselnost večje številke, saj se pogosto dogaja da ve želji po navidezno bolj kvalitetni glasbi datoteke prekodiramo iz manjše v večjo bitno hitrost, a to ne nadomesti izgubljenih podatkov pri kodiranju na manjšo bitno hitrost že prej (MP3 standard za stiskanje podatkov z izgubo)    
--->
+
+[//]: # (Pogledali si bomo tudi velikost datoteke pri posamezni bitni hitrosti. Če je velikost datoteke pri večji bitni hitrosti primerljiva z velikostjo pri veliko manjši bitni hitrosti (320 <-> 256 <-> 192 <-> 128 ...), to lahko nakazuje na nesmiselnost večje številke, saj se pogosto dogaja da ve želji po navidezno bolj kvalitetni glasbi datoteke prekodiramo iz manjše v večjo bitno hitrost, a to ne nadomesti izgubljenih podatkov pri kodiranju na manjšo bitno hitrost že prej (MP3 standard za stiskanje podatkov z izgubo))
