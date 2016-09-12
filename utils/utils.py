@@ -11,10 +11,10 @@ import os.path
 
 
 class Utils:
-    base_servers = {10: "sunka", 144: "svastaaws", 360: "kravampx", 442: "balkanmp3_new", 443: "balkanmp3s_old", 451: "yucafe_old",
-                    453: "yucafe_new", 470: "narodnjak.si", 471: "zlatizvoki.com", 514: "balkandj", 516: "mixoteka",
-                    520: "megamixers", 544: "kravampv", 568: "upload", 590: "folkoteka", 600: "exyudownload",
-                    1152: "klav.ma3x.org", 1155: "hrvatskihost", 1157: "muzickinet"}
+    base_servers = {10: "sunka", 144: "svastaaws", 360: "kravampx", 442: "balkanmp3_new", 443: "balkanmp3s_old",
+                    451: "yucafe_old", 453: "yucafe_new", 470: "narodnjak.si", 471: "zlatizvoki.com", 514: "balkandj",
+                    516: "mixoteka", 520: "megamixers", 544: "kravampv", 568: "upload", 590: "folkoteka",
+                    600: "exyudownload", 1152: "klav.ma3x.org", 1155: "hrvatskihost", 1157: "muzickinet"}
 
     def __init__(self, servers=None):
         self.servers = servers if servers else self.base_servers
@@ -37,7 +37,7 @@ class Utils:
 
         # Export for validation
         cursor.execute("SELECT id, name, server, bitr, time, size, freq FROM main "
-                        # I know this is bad, but normal parametrized queries do not work
+                       # I know this is bad, but normal parametrized queries do not work
                        "WHERE server IN {servers}".format(servers=tuple(self.get_server_ids())))
 
         with open(os.path.join("data", "export_servers.csv"), "w", encoding="utf8", newline="") as out_csv:

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 """Muzik analyser"""
-from collections import defaultdict
-import pickle
 import os.path
+import pickle
+from collections import defaultdict
 
 from models.Song import Song
 from utils.utils import Utils
@@ -12,7 +12,6 @@ __author__ = "Filip Koprivec"
 
 
 def main(export=False):
-
     if export:
         utils = Utils()
 

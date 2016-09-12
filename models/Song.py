@@ -8,6 +8,7 @@ try:
     from typing import List
 except ImportError:  # Jupyter on < 3.5
     from collections import defaultdict
+
     List = defaultdict(int)
 
 from models.PrintableStructure import PrintableStructure
@@ -17,7 +18,8 @@ __author__ = "Filip Koprivec"
 
 # Make canonical
 class Canonizer:
-    def __init__(self, allowed_chars=string.ascii_lowercase+string.digits, forbidden_words=("official", "video", "edit")):
+    def __init__(self, allowed_chars=string.ascii_lowercase + string.digits,
+                 forbidden_words=("official", "video", "edit")):
         self.allowed_chars = set(allowed_chars)
         self.chars_replace_dict = {"č": "c", "š": "s", "ć": "c", "ž": "z", "đ": "dj", "ł": "l", "ß": "ss"}
         self.special_replace_dict = {"'": ""}  # For  "It's something" == "Its something"
@@ -65,14 +67,14 @@ class Song(PrintableStructure):
     analyzing_servers = {514, 442, 443, 590, 1152, 520, 516, 1157, 470, 453, 451, 471}
 
     def __init__(self, muzik_id, name, server, bit_rate, duration, size, frequency):
-        self.muzik_id = muzik_id                                    # type: str
-        self.name = name                                            # type: str
-        self.server = int(server)                                   # type: int
-        self.bit_rate = int(bit_rate) if bit_rate else 0            # type: int
-        self.duration = int(duration) if duration else 0            # type: int
-        self.size = int(size) if size else 0                        # type: int
-        self.frequency = int(frequency) if frequency else 0         # type: int
-        self.canonic_name = self.make_canonic_name()                # type: str
+        self.muzik_id = muzik_id  # type: str
+        self.name = name  # type: str
+        self.server = int(server)  # type: int
+        self.bit_rate = int(bit_rate) if bit_rate else 0  # type: int
+        self.duration = int(duration) if duration else 0  # type: int
+        self.size = int(size) if size else 0  # type: int
+        self.frequency = int(frequency) if frequency else 0  # type: int
+        self.canonic_name = self.make_canonic_name()  # type: str
 
     # Canonize name for song name comparison
     def make_canonic_name(self):
